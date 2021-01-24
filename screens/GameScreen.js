@@ -16,7 +16,7 @@ const generateRandomNum = (min, max, exclude) => {
 
 const GameScreen = props => {
 
-  const [currentGuess, setCurrentGuess] = useState(generateRandomNum(1, 100, props.userChoice))
+  const [currentGuess, setCurrentGuess] = useState(generateRandomNum(1, 100, parseInt(props.userChoice)))
 
   return(
     <View style={styles.screen}>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: '20',
+    marginTop: 20,
     width: 300,
     maxWidth: '80%'
   }
