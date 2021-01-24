@@ -14,21 +14,22 @@ const generateRandomNum = (min, max, exclude) => {
   }
 }
 
-const GameScreen = props => {
+const GameScreen = ({userChoice, onGameOver}) => {
 
-  const [currentGuess, setCurrentGuess] = useState(generateRandomNum(1, 100, parseInt(props.userChoice)))
+  const [currentGuess, setCurrentGuess] = useState(generateRandomNum(1, 100, parseInt(userChoice)))
+  const [rounds, setRounds] = useState(0)
 
   const currentLow = useRef(1)
   const currentHigh = useRef(100)
 
   useEffect(()=>{
-    if(currentGuess === props.userChoice){
-      
+    if(currentGuess === userChoice){
+      onGameOver(rounds)
     }
-  })
+  }, [currentGuess, userChoice, onGameOver])
 
   const nextGuessHandler = direction => {
-    if((direction === 'lower' && currentGuess < props.userChoice)||(direction === 'greater' && currentGuess > props.userChoice) ){
+    if((direction === 'lower' && currentGuess < userChoice)||(direction === 'greater' && currentGuess > userChoice) ){
       Alert.alert('Dont lie!', 'You know that this is wrong...', [{text : 'Sorry!', style: 'cancel'}])
       return
     }
@@ -40,6 +41,7 @@ const GameScreen = props => {
     }
     const nextNumber = generateRandomNum(currentLow.current, currentHigh.current, currentGuess)
     setCurrentGuess(nextNumber)
+    setRounds(prevState => prevState + 1)
   }
 
   return(
