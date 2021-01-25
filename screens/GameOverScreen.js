@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Button, Image } from 'react-native'
+import CustomButton from '../components/CustomButton'
 
 const GameOverScreen = props => {
 
@@ -11,7 +12,15 @@ const GameOverScreen = props => {
         <Image
           style={styles.image}
           source={require('../assets/success.png')}
-        /***
+          /**
+          *
+          * this is how you load an image from the web 
+          * you can use an optional prop fadeDuration
+          */
+          // source={uri: 'url to image'}
+          // fadeDuration={300}
+        /**
+         * 
          * these are the different setting on image tag, cover is default
          *  */
         // resizeMode='cover'
@@ -24,7 +33,7 @@ const GameOverScreen = props => {
       </View>
       <Text>Number of rounds: {props.roundsNumber}</Text>
       <Text>Number was: {props.userNumber}</Text>
-      <Button title="New Game" onPress={props.onRestart} />
+      <CustomButton onPress={props.onRestart}>New Game</CustomButton>
     </View>
   )
 }
